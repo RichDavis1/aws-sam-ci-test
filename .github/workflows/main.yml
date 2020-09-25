@@ -31,6 +31,9 @@ jobs:
       - name: SAM Package
         #uses: RichDavis1/aws-sam-ci-test/github/actions/sam/package
         uses: ./.github/actions/sam/package
+
+        #uses: RichDavis1/aws-sam-ci-test/github/actions/sam/package
+        #uses: ./github/actions/sam/package
         #uses: ./sam-testaroni
 
         env:
