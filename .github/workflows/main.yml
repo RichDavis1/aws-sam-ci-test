@@ -41,4 +41,4 @@ jobs:
           bucket: $ 
           template_file: template.yaml
           output_template_file: $.yaml
-          working_directory: ./sam-testaroni/.aws-sam/build
+          working_directory: ./.sam-testaroni/.aws-sam/build
