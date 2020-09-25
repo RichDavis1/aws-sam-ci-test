@@ -30,8 +30,9 @@ jobs:
           
       - name: SAM Package
         #uses: ./.github/actions/sam/package
-        uses: ./.sam-testaroni
+        uses: ./sam-testaroni
         env:
+          TEMPLATE: 'template.yaml'
           SAM_CLI_TELEMETRY: 0
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
