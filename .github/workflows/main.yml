@@ -29,8 +29,8 @@ jobs:
           go-version: '^1.14.0'
 
       - name: SAM Package
-        #uses: ./.github/actions/sam/package
-        uses: ./.sam-testaroni
+        uses: ./.github/actions/sam/package
+        #uses: ./.sam-testaroni
         env:
           TEMPLATE: 'template.yaml'
           SAM_CLI_TELEMETRY: 0
