@@ -1,0 +1,24 @@
+name: AWS SAM Package
+description: Package a SAM application
+
+runs:
+  using: docker
+  image: Dockerfile
+inputs:
+    bucket:
+      description: bucket to put artifacts into
+      required: true
+    template_file:
+      description: the template file
+      required: false
+    prefix:
+      description: bucket prefix
+      required: false
+    output_template_file:
+      description: Output file
+      required: false
+      default: packaged.yaml
+    working_directory:
+      description: Working directory
+      required: false
+      default: "."
