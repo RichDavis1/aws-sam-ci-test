@@ -30,7 +30,8 @@ jobs:
 
       - name: SAM Package
         uses: /github/actions/sam/package
-        #uses: ./.sam-testaroni
+        #uses: ./sam-testaroni
+
         env:
           TEMPLATE: 'template.yaml'
           SAM_CLI_TELEMETRY: 0
