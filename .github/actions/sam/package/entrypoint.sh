@@ -11,7 +11,8 @@ cd $INPUT_WORKING_DIRECTORY
 ARGS=()
 
 (( -z "$PREFIX" )) && args+=( "--prefix $PREFIX")
-
+echo "Bucket"
+echo "$INPUT_BUCKET"
 ARGS+=( "--s3-bucket $INPUT_BUCKET" )
 ARGS+=( "--template-file $INPUT_TEMPLATE_FILE" )
 ARGS+=( "--output-template-file $INPUT_OUTPUT_TEMPLATE_FILE" )
