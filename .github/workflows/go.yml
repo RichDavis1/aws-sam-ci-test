@@ -14,10 +14,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Prepare Environment
-      uses: actions/setup-go@v1
+      uses: actions/setup-go@v2
       with:
         go-version: ^1.14
-      id: go
+    - run: go version
     - name: sam build
       uses: TractorZoom/sam-cli-action@master
       with:
