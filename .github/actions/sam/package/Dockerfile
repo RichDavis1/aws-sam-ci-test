@@ -3,7 +3,7 @@ FROM golang:alpine
 RUN apk add --no-cache bash
 RUN apk add --no-cache git
 RUN apk add --no-cache curl
-RUN apk --no-cache add ruby ruby-dev ruby-bundler ruby-json ruby-irb ruby-rake ruby-bigdecimal && \
+RUN apk --no-cache add ruby ruby-dev ruby-bundler ruby-json ruby-irb ruby-rake ruby-bigdecimal
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 RUN test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
 RUN test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
