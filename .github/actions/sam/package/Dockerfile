@@ -1,5 +1,5 @@
-#FROM golang:alpine
-FROM golang
+FROM golang:alpine
+#FROM golang
 
 ENV SAM_CLI_TELEMETRY 0
 
