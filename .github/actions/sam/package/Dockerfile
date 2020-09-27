@@ -1,6 +1,7 @@
 FROM golang:alpine
 #FROM nikolaik/python-nodejs:python3.8-nodejs12-alpine
 RUN apk add --no-cache bash
+RUN apk add --no-cache git
 RUN git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew \
 && mkdir ~/.linuxbrew/bin \
 && ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin \
