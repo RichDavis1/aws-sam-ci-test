@@ -1,24 +1,25 @@
-name: AWS SAM Package
-description: Package a SAM application
-
-runs:
-  using: docker
-  image: Dockerfile
+name: "AWS SAM CLI Github Action"
+description: "Run AWS SAM commands via Github Actions"
+author: "tractorzoom"
+branding:
+  icon: "terminal"
+  color: "blue"
 inputs:
-    bucket:
-      description: bucket to put artifacts into
-      required: true
-    template_file:
-      description: the template file
-      required: false
-    prefix:
-      description: bucket prefix
-      required: false
-    output_template_file:
-      description: Output file
-      required: false
-      default: packaged.yaml
-    working_directory:
-      description: Working directory
-      required: false
-      default: "."
+  sam_version:
+    description: "AWS SAM version to install."
+    default: "latest"
+  sam_command:
+    description: "AWS SAM subcommand to execute."
+    required: true
+  actions_comment:
+    description: "Whether or not to comment on pull requests."
+    default: false
+  github_package_registry_token:
+    description: "Github package registry token to install dependencies outside of npm"
+    default: ""
+  directory:
+    description: "directory in which to execute sam command."
+    default: "./"
+runs:
+  using: "docker"
+  image: "./Dockerfile"
