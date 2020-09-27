@@ -16,8 +16,10 @@ function installAwsSam(){
 		pip3 install aws-sam-cli >/dev/null 2>&1
 		if [ "${?}" -ne 0 ]; then
 			#test = pip3 install aws-sam-cli >/dev/null 2>&1
+			echo $?
 			test = pip --version
 			echo "${test}"
+			
 			python3 -m pip list
 			echo python --version
 			echo "Failed to install aws-sam-cli ${INPUT_SAM_VERSION}"
