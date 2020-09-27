@@ -13,11 +13,13 @@ function parseInputs(){
 function installAwsSam(){
 	echo "Install aws-sam-cli ${INPUT_SAM_VERSION}"
 	if [ "${INPUT_SAM_VERSION}" == "latest" ]; then
-		pip3 install aws-sam-cli >/dev/null 2>&1
+		pip install --user aws-sam-cli
+		#pip3 install aws-sam-cli >/dev/null 2>&1
 		if [ "${?}" -ne 0 ]; then
 			#test = pip3 install aws-sam-cli >/dev/null 2>&1
 			#echo "Run sam ${INPUT_SAM_COMMAND}"
-			output=$(pip install aws-sam-cli 2>&1)
+			output=$(pip install --user aws-sam-cli)
+			#output=$(pip3 install aws-sam-cli 2>&1)
 			#output=$(pip3 install aws-sam-cli >/dev/null 2>&1)			
 			echo "${output}"
 			echo "${?}"
