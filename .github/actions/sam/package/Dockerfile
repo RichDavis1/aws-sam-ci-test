@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3-dev && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 
-RUN pip install --upgrade pip setuptools
+RUN pip3 install --upgrade pip setuptools
 #RUN pip install sys
 #RUN pip install setuptools
 #RUN pip install tokenize
