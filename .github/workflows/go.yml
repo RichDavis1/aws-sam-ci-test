@@ -19,7 +19,11 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ^1.14
-    - run: go version
+      run: |
+        echo "::set-env name=GOPATH::${{ github.workspace }}/go"
+        echo "::add-path::${{ github.workspace }}/go/bin"        
+        go version
+    #- run: go version
     - name: sam build
       uses: ./.github/actions/sam/package
       #uses: TractorZoom/sam-cli-action@master
