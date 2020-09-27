@@ -1,4 +1,6 @@
-FROM golang:alpine
+#FROM golang:alpine
+FROM golang
+
 ENV SAM_CLI_TELEMETRY 0
 
 RUN apk add --no-cache bash
