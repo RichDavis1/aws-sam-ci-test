@@ -3,16 +3,17 @@ FROM golang:alpine
 RUN apk add --no-cache bash
 
 ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN apk add --update --no-cache python3-dev && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 
-RUN pip3 install --upgrade pip setuptools
+RUN pip install --upgrade pip setuptools
 #RUN pip install sys
 #RUN pip install setuptools
 #RUN pip install tokenize
 RUN pip freeze > requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install wheel
+
 RUN export PYTHONPATH="$PYTHONPATH:/app"
 ENV PYTHONPATH="$PYTHONPATH:/app"
 RUN pip install aws-sam-cli
