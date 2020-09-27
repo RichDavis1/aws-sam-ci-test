@@ -17,7 +17,8 @@ function installAwsSam(){
 		if [ "${?}" -ne 0 ]; then
 			#test = pip3 install aws-sam-cli >/dev/null 2>&1
 			#echo "Run sam ${INPUT_SAM_COMMAND}"
-			output=$(pip3 install aws-sam-cli >/dev/null 2>&1)			
+			output=$(pip3 install aws-sam-cli 2>&1)
+			#output=$(pip3 install aws-sam-cli >/dev/null 2>&1)			
 			echo "${output}"
 			echo "${?}"
 			echo "done printing errors"
