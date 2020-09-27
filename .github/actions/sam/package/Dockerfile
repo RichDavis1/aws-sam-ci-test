@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:1.14.0-alpine
 #FROM golang
 
 ENV SAM_CLI_TELEMETRY 0
