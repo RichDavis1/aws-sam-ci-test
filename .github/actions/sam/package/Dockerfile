@@ -9,6 +9,8 @@ RUN pip3 install --upgrade pip setuptools
 #RUN pip install sys
 #RUN pip install setuptools
 #RUN pip install tokenize
+RUN pip3 install -r requirements.txt
+RUN pip3 install wheel
 RUN export PYTHONPATH="$PYTHONPATH:/app"
 ENV PYTHONPATH="$PYTHONPATH:/app"
 #RUN pip install aws-sam-cli
