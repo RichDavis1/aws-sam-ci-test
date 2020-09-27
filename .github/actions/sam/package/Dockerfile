@@ -15,6 +15,7 @@ RUN pip install -r requirements.txt
 RUN pip install wheel
 RUN export PYTHONPATH="$PYTHONPATH:/app"
 ENV PYTHONPATH="$PYTHONPATH:/app"
+RUN pip install aws-sam-cli
 #RUN pip install aws-sam-cli
 #ENV SAM_CLI_TELEMETRY 0
 #RUN sudo apt-get update
