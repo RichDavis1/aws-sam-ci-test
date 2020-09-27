@@ -82,6 +82,9 @@ ${output}
 }
 
 function gotoDirectory(){
+	echo "directory"
+	echo ${INPUT_DIRECTORY}
+	
 	if [ -z "${INPUT_DIRECTORY}" ]; then
 		return 1
 	fi
