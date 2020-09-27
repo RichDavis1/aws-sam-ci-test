@@ -19,7 +19,8 @@ jobs:
         go-version: ^1.14
     - run: go version
     - name: sam build
-      uses: TractorZoom/sam-cli-action@master
+      uses: ./.github/actions/sam/package
+      #uses: TractorZoom/sam-cli-action@master
       with:
         sam_command: "build"
         directory: ./sam-testaroni
