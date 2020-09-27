@@ -94,7 +94,7 @@ function gotoDirectory(){
 
 function main(){
 	parseInputs
-	installAwsSam
+	#installAwsSam
 	gotoDirectory
 	runSam
 }
