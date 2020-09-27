@@ -1,5 +1,7 @@
 FROM golang:alpine
 #FROM nikolaik/python-nodejs:python3.8-nodejs12-alpine
+RUN apk add --no-cache bash
+
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
