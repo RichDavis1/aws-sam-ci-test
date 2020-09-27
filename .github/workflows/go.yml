@@ -18,18 +18,34 @@ jobs:
       with:
         go-version: ^1.14
       id: go
-    - name: SAM Package
-      uses: ./.github/actions/sam/package
-      env:
-        SAM_CLI_TELEMETRY: 0
-        AWS_ACCESS_KEY_ID: $
-        AWS_SECRET_ACCESS_KEY: $
+    - name: sam build
+      uses: TractorZoom/sam-cli-action@master
       with:
-        prefix: $/$
-        bucket: $ 
-        template_file: template.yaml
-        output_template_file: $.yaml
-        working_directory: ./.aws-sam/build
+        sam_command: "build"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+    - name: sam deploy
+      uses: TractorZoom/sam-cli-action@master
+      with:
+        sam_command: "deploy"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}      
+    #- name: SAM Package
+    #  uses: ./.github/actions/sam/package
+    #  env:
+    #    SAM_CLI_TELEMETRY: 0
+    #    AWS_ACCESS_KEY_ID: $
+    #    AWS_SECRET_ACCESS_KEY: $
+    #  with:
+    #    prefix: $/$
+    ##    bucket: $ 
+    #    template_file: template.yaml
+    #    output_template_file: $.yaml
+    #    working_directory: ./.aws-sam/build
     #- name: Push Template to S3
     #  uses: actions/aws/cli@master
     #  env:
