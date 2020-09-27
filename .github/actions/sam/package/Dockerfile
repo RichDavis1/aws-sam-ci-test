@@ -11,7 +11,7 @@ RUN	adduser -s /bin/bash samcli \
 RUN sam --version
 
 ADD . . 
-#COPY . .
+COPY . .
 #USER samcli
 
 #WORKDIR /home/samcli
