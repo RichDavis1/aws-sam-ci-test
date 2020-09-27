@@ -21,6 +21,11 @@ RUN  adduser -s /bin/bash samcli \
 RUN sam --version
 	
 RUN sam --version
+RUN GOOS = "linux"
+RUN CGO_ENABLED=0
+RUN GOARCH = "amd64"
+ENV GOPATH=/opt/go/ 
+ENV PATH=$PATH:$GOPATH/bin   
 
 COPY entrypoint.sh /entrypoint.sh
 
