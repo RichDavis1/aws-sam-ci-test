@@ -1,19 +1,11 @@
-FROM ubuntu
+FROM nikolaik/python-nodejs:python3.8-nodejs12-alpine
 
-LABEL version="1.0.0"
+ENV SAM_CLI_TELEMETRY 0
 
-LABEL com.github.actions.name="SAM Deploy Action"
-LABEL com.github.actions.description="Deploy AWS SAM Stack"
-LABEL com.github.actions.icon="upload-cloud"
-LABEL com.github.actions.color="blue"
+RUN apk --update --no-cache add jq curl bash gcc git make musl-dev libc6-compat tar && \
+  curl https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz | tar -xvzf - -C /usr/local 
+ENV GOROOT /usr/local/go
+ENV PATH ${PATH}:${GOROOT}/bin
+COPY entrypoint.sh /entrypoint.sh
 
-LABEL repository="https://github.com/r0zar/sam-deploy-action"
-LABEL homepage="https://github.com/r0zar/sam-deploy-action"
-LABEL maintainer="Ross Ragsdale <ross.ragsdale@gmail.com>"
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y awscli
-
-ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
