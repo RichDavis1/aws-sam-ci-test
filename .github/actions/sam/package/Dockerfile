@@ -22,7 +22,8 @@ RUN sam --version
 	
 RUN sam --version
 ENV GOOS = "linux"
-ENV CGO_ENABLED=0
+ENV GO111MODULE=on CGO_ENABLED=0
+#ENV CGO_ENABLED=0
 ENV GOARCH = "amd64"
 ENV GOPATH=/opt/go/ 
 ENV PATH=$PATH:$GOPATH/bin   
