@@ -18,6 +18,7 @@ function installAwsSam(){
 			#test = pip3 install aws-sam-cli >/dev/null 2>&1
 			echo $?
 			echo "${?}"
+			echo "done printing errors"
 			#test = pip --version
 			#echo "${test}"
 			
