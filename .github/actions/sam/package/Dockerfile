@@ -8,6 +8,8 @@ RUN	adduser -s /bin/bash samcli \
 	--disabled-password \
 	&& echo 'samcli ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 
+RUN sam --version
+
 #USER samcli
 
 #WORKDIR /home/samcli
