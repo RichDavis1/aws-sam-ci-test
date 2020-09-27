@@ -2,80 +2,28 @@
 
 set -e
 
-if [[ -z "$TEMPLATE" ]]; then
-    echo "Empty template specified. Looking for template.yaml..."
+cd $INPUT_WORKING_DIRECTORY
 
-    if [[ ! -f "template.yaml" ]]; then
-        echo template.yaml not found
-        exit 1
-    fi
+# Respect AWS_DEFAULT_REGION if specified
+[ -n "$AWS_DEFAULT_REGION" ] || export AWS_DEFAULT_REGION=us-east-1
 
-    TEMPLATE="template.yaml"
-fi
+# Respect AWS_DEFAULT_OUTPUT if specified
+[ -n "$AWS_DEFAULT_OUTPUT" ] || export AWS_DEFAULT_OUTPUT=json
 
-if [[ -z "$AWS_STACK_NAME" ]]; then
-    echo AWS Stack Name invalid
-    exit 1
-fi
+ARGS=()
 
-if [[ -z "$AWS_ACCESS_KEY_ID" ]]; then
-    echo AWS Access Key ID invalid
-    exit 1
-fi
+(( -z "$PREFIX" )) && args+=( "--prefix $PREFIX")
 
-if [[ -z "$AWS_SECRET_ACCESS_KEY" ]]; then
-    echo AWS Secret Access Key invalid
-    exit 1
-fi
+ARGS+=( "--s3-bucket $INPUT_BUCKET" )
+ARGS+=( "--template-file $INPUT_TEMPLATE_FILE" )
+ARGS+=( "--output-template-file $INPUT_OUTPUT_TEMPLATE_FILE" )
 
-if [[ -z "$AWS_REGION" ]]; then
-    echo AWS Region invalid
-    exit 1
-fi
+CMD="sam package ${ARGS[@]}"
 
-if [[ -z "$AWS_DEPLOY_BUCKET" ]]; then
-    echo AWS Deploy Bucket invalid
-    exit 1
-fi
+output=$( sh -c "$CMD" )
 
-if [[ ! -z "$AWS_BUCKET_PREFIX" ]]; then
-    AWS_BUCKET_PREFIX="--s3-prefix ${AWS_BUCKET_PREFIX}"
-fi
+# Preserve output for consumption by downstream actions
+echo "$output" > "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
 
-if [[ $FORCE_UPLOAD == true ]]; then
-    FORCE_UPLOAD="--force-upload"
-fi
-
-if [[ $USE_JSON == true ]]; then
-    USE_JSON="--use-json"
-fi
-
-if [[ -z "$CAPABILITIES" ]]; then
-    CAPABILITIES="--capabilities CAPABILITY_IAM"
-else
-    CAPABILITIES="--capabilities $CAPABILITIES"
-fi
-
-if [[ ! -z "$PARAMETER_OVERRIDES" ]]; then
-    PARAMETER_OVERRIDES="--parameter-overrides $PARAMETER_OVERRIDES"
-fi
-
-if [[ ! -z "$TAGS" ]]; then
-    TAGS="--tags $TAGS"
-fi
-
-mkdir ~/.aws
-touch ~/.aws/credentials
-touch ~/.aws/config
-
-echo "[default]
-aws_access_key_id = $AWS_ACCESS_KEY_ID
-aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
-region = $AWS_REGION" > ~/.aws/credentials
-
-echo "[default]
-output = text
-region = $AWS_REGION" > ~/.aws/config
-
-aws cloudformation package --template-file $TEMPLATE --output-template-file serverless-output.yaml --s3-bucket $AWS_DEPLOY_BUCKET $AWS_BUCKET_PREFIX $FORCE_UPLOAD $USE_JSON
-aws cloudformation deploy --template-file serverless-output.yaml --stack-name $AWS_STACK_NAME $CAPABILITIES $PARAMETER_OVERRIDES $TAGS
+# Write output to STDOUT
+echo "$output"
