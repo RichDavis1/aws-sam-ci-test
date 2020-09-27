@@ -1,5 +1,5 @@
 FROM golang:alpine
-SAM_CLI_TELEMETRY=0
+ENV SAM_CLI_TELEMETRY 0
 
 RUN apk add --no-cache bash
 ENV PYTHONUNBUFFERED=1
