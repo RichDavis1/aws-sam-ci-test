@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.8-nodejs12-alpine
+FROM golang:alpine
 
 ENV SAM_CLI_TELEMETRY 0
 
