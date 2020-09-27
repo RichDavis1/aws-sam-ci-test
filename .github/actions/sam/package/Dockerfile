@@ -10,6 +10,7 @@ RUN	adduser -s /bin/bash samcli \
 
 RUN sam --version
 
+ADD . . 
 #COPY . .
 #USER samcli
 
