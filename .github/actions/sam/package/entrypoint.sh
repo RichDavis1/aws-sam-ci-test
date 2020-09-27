@@ -1,29 +1,88 @@
 #!/bin/bash
 
-set -e
+set -u
 
-cd $INPUT_WORKING_DIRECTORY
+function parseInputs(){
+	# Required inputs
+	if [ "${INPUT_SAM_COMMAND}" == "" ]; then
+		echo "Input sam_subcommand cannot be empty"
+		exit 1
+	fi
+}
 
-# Respect AWS_DEFAULT_REGION if specified
-[ -n "$AWS_DEFAULT_REGION" ] || export AWS_DEFAULT_REGION=us-east-1
+function installAwsSam(){
+	echo "Install aws-sam-cli ${INPUT_SAM_VERSION}"
+	if [ "${INPUT_SAM_VERSION}" == "latest" ]; then
+		pip install aws-sam-cli >/dev/null 2>&1
+		if [ "${?}" -ne 0 ]; then
+			echo "Failed to install aws-sam-cli ${INPUT_SAM_VERSION}"
+		else
+			echo "Successful install aws-sam-cli ${INPUT_SAM_VERSION}"
+		fi
+	else
+		pip install aws-sam-cli==${INPUT_SAM_VERSION} >/dev/null 2>&1
+		if [ "${?}" -ne 0 ]; then
+			echo "Failed to install aws-sam-cli ${INPUT_SAM_VERSION}"
+		else
+			echo "Successful install aws-sam-cli ${INPUT_SAM_VERSION}"
+		fi
+	fi
+}
 
-# Respect AWS_DEFAULT_OUTPUT if specified
-[ -n "$AWS_DEFAULT_OUTPUT" ] || export AWS_DEFAULT_OUTPUT=json
+function runSam(){
+	if [ "${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" == "" ]; then
+		echo "//npm.pkg.github.com/:_authToken=${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" > ~/.npmrc
+	fi
 
-ARGS=()
+	echo "Run sam ${INPUT_SAM_COMMAND}"
+	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
+	exitCode=${?}
+	echo "${output}"
 
-(( -z "$PREFIX" )) && args+=( "--prefix $PREFIX")
+	commentStatus="Failed"
+	if [ "${exitCode}" == "0" ]; then
+		commentStatus="Success"
+	fi
 
-ARGS+=( "--s3-bucket $INPUT_BUCKET" )
-ARGS+=( "--template-file $INPUT_TEMPLATE_FILE" )
-ARGS+=( "--output-template-file $INPUT_OUTPUT_TEMPLATE_FILE" )
+	if [ "$GITHUB_EVENT_NAME" == "pull_request" ] && [ "${INPUT_ACTIONS_COMMENT}" == "true" ]; then
+		commentWrapper="#### \`sam ${INPUT_SAM_COMMAND}\` ${commentStatus}
+<details><summary>Show Output</summary>
+\`\`\`
+${output}
+\`\`\`
+</details>
+*Workflow: \`${GITHUB_WORKFLOW}\`, Action: \`${GITHUB_ACTION}\`*"
 
-CMD="sam package ${ARGS[@]}"
+		payload=$(echo "${commentWrapper}" | jq -R --slurp '{body: .}')
+		commentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
 
-output=$( sh -c "$CMD" )
+		echo "${payload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${commentsURL}" > /dev/null
+	fi
 
-# Preserve output for consumption by downstream actions
-echo "$output" > "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
+	if [ "${exitCode}" == "1" ]; then
+		exit 1
+	fi
+}
 
-# Write output to STDOUT
-echo "$output"
+function gotoDirectory(){
+	if [ -z "${INPUT_DIRECTORY}" ]; then
+		return 1
+	fi
+
+	if [ ! -d "${INPUT_DIRECTORY}" ]; then
+		echo "Directory ${INPUT_DIRECTORY} does not exists."
+		exit 127
+	fi
+
+	echo "cd ${INPUT_DIRECTORY}"
+	cd $INPUT_DIRECTORY
+}
+
+function main(){
+	parseInputs
+	installAwsSam
+	gotoDirectory
+	runSam
+}
+
+main
