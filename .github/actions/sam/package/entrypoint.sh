@@ -47,7 +47,10 @@ function runSam(){
 	if [ "${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" == "" ]; then
 		echo "//npm.pkg.github.com/:_authToken=${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" > ~/.npmrc
 	fi
-
+	
+	echo "go path"
+	
+	echo "${GODEBUG)"
 	echo "Run sam ${INPUT_SAM_COMMAND}"
 	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
 	exitCode=${?}
