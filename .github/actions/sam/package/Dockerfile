@@ -14,6 +14,7 @@ RUN	adduser -s /bin/bash samcli \
 
 FROM golang:alpine
 COPY --from=builder . .
+RUN apk add --no-cache bash
 
 COPY entrypoint.sh /entrypoint.sh
 
