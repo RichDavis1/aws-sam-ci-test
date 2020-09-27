@@ -21,9 +21,9 @@ RUN  adduser -s /bin/bash samcli \
 RUN sam --version
 	
 RUN sam --version
-RUN GOOS = "linux"
-RUN CGO_ENABLED=0
-RUN GOARCH = "amd64"
+ENV GOOS = "linux"
+ENV CGO_ENABLED=0
+ENV GOARCH = "amd64"
 ENV GOPATH=/opt/go/ 
 ENV PATH=$PATH:$GOPATH/bin   
 
