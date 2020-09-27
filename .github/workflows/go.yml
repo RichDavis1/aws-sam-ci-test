@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
     - name: Prepare Environment
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v1
       with:
-        go-version: ^1.13
+        go-version: ^1.14
       id: go
     - name: SAM Package
       uses: ./.github/actions/sam/package
@@ -30,21 +30,21 @@ jobs:
         template_file: template.yaml
         output_template_file: $.yaml
         working_directory: ./.aws-sam/build
-    - name: Push Template to S3
-      uses: actions/aws/cli@master
-      env:
-        AWS_ACCESS_KEY_ID: $
-        AWS_SECRET_ACCESS_KEY: $
-      with:
-        args: >-
-          s3 cp ./.aws-sam/build/$.yaml
-          s3://$/$/$/template.yaml
-    - name: Publish
-      if: startsWith(github.ref, 'refs/tags')
-      uses: ./.github/actions/sam/publish
-      env:
-        SAM_CLI_TELEMETRY: 0
-        AWS_ACCESS_KEY_ID: $
-        AWS_SECRET_ACCESS_KEY: $
-      with:
-        TEMPLATE: ./.aws-sam/build/$.yaml
+    #- name: Push Template to S3
+    #  uses: actions/aws/cli@master
+    #  env:
+    #    AWS_ACCESS_KEY_ID: $
+    #    AWS_SECRET_ACCESS_KEY: $
+    #  with:
+    #    args: >-
+    #      s3 cp ./.aws-sam/build/$.yaml
+    #      s3://$/$/$/template.yaml
+    #- name: Publish
+    #  if: startsWith(github.ref, 'refs/tags')
+    #  uses: ./.github/actions/sam/publish
+    #  env:
+    #    SAM_CLI_TELEMETRY: 0
+    #    AWS_ACCESS_KEY_ID: $
+    #    AWS_SECRET_ACCESS_KEY: $
+    #  with:
+    #    TEMPLATE: ./.aws-sam/build/$.yaml
