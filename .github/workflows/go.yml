@@ -28,7 +28,7 @@ jobs:
       uses: ./.github/actions/sam/package
       #uses: TractorZoom/sam-cli-action@master
       with:
-        sam_command: "build --runtime go1.x"
+        sam_command: "build --debug"
         directory: ./sam-testaroni
         #directory: ./sam-testaroni/.aws-sam/build        
       env:
