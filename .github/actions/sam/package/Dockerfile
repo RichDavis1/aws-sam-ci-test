@@ -27,9 +27,10 @@ ENV GOOS = "linux"
 ENV GO111MODULE=on CGO_ENABLED=0
 #ENV CGO_ENABLED=0
 ENV GOARCH = "amd64"
-ENV GOPATH /go
+#ENV GOPATH /go
 #ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
-
+RUN echo $PATH
+RUN echo $GOPATH
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
