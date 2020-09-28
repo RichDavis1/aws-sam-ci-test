@@ -1,5 +1,7 @@
 FROM nikolaik/python-nodejs:python3.8-nodejs12-alpine
 
+RUN apk add bash
+
 ENV SAM_CLI_TELEMETRY 0
 RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
    pip --no-cache-dir install aws-sam-cli awscli && \
