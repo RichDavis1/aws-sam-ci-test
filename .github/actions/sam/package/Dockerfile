@@ -34,6 +34,7 @@ WORKDIR ./aws-sam-ci-test/sam-testaroni
 RUN ls -R
 
 RUN sam build
+RUN sam deploy
 
 ENV GOOS = "linux"
 ENV GO111MODULE=on CGO_ENABLED=0
