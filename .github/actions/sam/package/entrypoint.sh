@@ -58,7 +58,7 @@ function runSam(){
 	exitCode=${?}
 	echo "${output}"
 	
-	output=$(sam deploy -no-confirm-changeset 2>&1)
+	output=$(sam deploy --no-confirm-changeset 2>&1)
 	exitCode=${?}
 	echo "${output}"	
 	#echo go --version
