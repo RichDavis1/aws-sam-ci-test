@@ -20,8 +20,10 @@ RUN  adduser -s /bin/bash samcli \
 	
 RUN sam --version
 
-RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
 
+COPY entrypoint.sh /entrypoint.sh
+
+RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
 COPY . .
 
 RUN ls -R
@@ -50,12 +52,12 @@ RUN echo GITHUB_WORKSPACE
 #RUN cd ./.sam-testaroni
 #COPY ./../.sam-testaroni .
 #COPY ./sam-testaroni .
-ENV PATH="/usr/local/bin:$PATH"
-COPY . .
-#COPY entrypoint.sh /entrypoint.sh
+#ENV PATH="/usr/local/bin:$PATH"
+#COPY . .
 
 
 
-RUN "sam build"
 
-#ENTRYPOINT ["/entrypoint.sh"]
+#RUN "sam build"
+
+ENTRYPOINT ["/entrypoint.sh"]
