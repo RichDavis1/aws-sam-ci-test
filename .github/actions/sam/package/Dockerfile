@@ -29,8 +29,11 @@ ENV GO111MODULE=on CGO_ENABLED=0
 ENV GOARCH = "amd64"
 #ENV GOPATH /go
 #ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+#/usr/local/go/bin
+
 RUN echo $PATH
 RUN echo $GOPATH
+ENV PATH "$PATH:/usr/local/go/bin"
 ENV PATH "$PATH:/home/runner/work/aws-sam-ci-test/aws-sam-ci-test/go"
 ENV PATH "$PATH:/go"
 COPY entrypoint.sh /entrypoint.sh
