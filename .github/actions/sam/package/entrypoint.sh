@@ -51,6 +51,8 @@ function runSam(){
 	#echo "go path"
 	
 	#echo "${GODEBUG}"
+	echo "path in entrypoint"
+	echo "$PATH"
 	echo "Run sam ${INPUT_SAM_COMMAND}"
 	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
 	exitCode=${?}
