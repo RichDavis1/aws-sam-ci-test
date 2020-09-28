@@ -18,7 +18,8 @@ jobs:
       with:
         go-version: ^1.14
     - run: |       
-        echo "::add-path::${{ github.workspace }}/bin"
+        #echo "::add-path::${{ github.workspace }}/bin"
+        echo "export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin"
         echo $PATH
         go version       
     - name: Checkout
