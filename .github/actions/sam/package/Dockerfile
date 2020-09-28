@@ -28,7 +28,7 @@ RUN echo $INPUT_DIRECTORY
 RUN echo $GITHUB_WORKSPACE
 RUN echo "${INPUT_DIRECTORY}"
 RUN echo GITHUB_WORKSPACE
-
+RUN cd ./.github
 RUN cd ./.sam-testaroni
 #COPY ./../.sam-testaroni .
 #COPY ./sam-testaroni .
