@@ -21,7 +21,7 @@ RUN  adduser -s /bin/bash samcli \
 RUN sam --version
 
 RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
-WORKDIR /sam-testaroni
+WORKDIR /sam-testaroni/.aws-sam/build
 
 RUN sam build
 
