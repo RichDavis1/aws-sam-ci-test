@@ -16,7 +16,7 @@ Resources:
     Properties:
       CodeUri: hello-world/
       Handler: hello-world
-      Runtime: go1.14
+      Runtime: go1.x
       Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
       Events:
         CatchAll:
@@ -33,7 +33,7 @@ Resources:
     Properties:
       CodeUri: nana/
       Handler: nana
-      Runtime: go1.14
+      Runtime: go1.x
       Tracing: Active # https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
       Events:
         CatchAll:
