@@ -2,7 +2,8 @@ FROM golang:1.14.0-alpine
 
 ENV SAM_CLI_TELEMETRY 0
 
-#RUN apk add bash
+RUN apk add bash
+RUN apk add git
 
 #ENV PYTHONUNBUFFERED=1
 #RUN apk add --update --no-cache python3-dev && ln -sf python3-dev /usr/bin/python
@@ -28,8 +29,10 @@ RUN echo $INPUT_DIRECTORY
 RUN echo $GITHUB_WORKSPACE
 RUN echo "${INPUT_DIRECTORY}"
 RUN echo GITHUB_WORKSPACE
-RUN echo "$PWD"
-RUN cd ../sam
+
+RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
+#RUN echo "$PWD"
+#RUN cd ../sam
 #RUN cd ./.github
 #RUN cd ./.sam-testaroni
 #COPY ./../.sam-testaroni .
