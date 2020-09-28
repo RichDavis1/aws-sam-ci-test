@@ -14,37 +14,37 @@ RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
    pip --no-cache-dir install aws-sam-cli awscli && \
    apk del builddeps
 
-RUN  adduser -s /bin/bash samcli \
-  --disabled-password \
-  && echo 'samcli ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+#RUN  adduser -s /bin/bash samcli \
+#  --disabled-password \
+#  && echo 'samcli ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
 	
 RUN sam --version
 
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
-COPY . .
+#RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
+#COPY . .
 
 RUN ls -R
 
-WORKDIR ./aws-sam-ci-test/sam-testaroni
+#WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
 
-RUN ls -R
+#RUN ls -R
 
-RUN sam build
-RUN sam deploy
+#RUN sam build
+#RUN sam deploy
 
-ENV GOOS = "linux"
-ENV GO111MODULE=on CGO_ENABLED=0
+#ENV GOOS = "linux"
+#ENV GO111MODULE=on CGO_ENABLED=0
 #ENV CGO_ENABLED=0
-ENV GOARCH = "amd64"
+#ENV GOARCH = "amd64"
 
-RUN echo $INPUT_DIRECTORY
-RUN echo $GITHUB_WORKSPACE
-RUN echo "${INPUT_DIRECTORY}"
-RUN echo GITHUB_WORKSPACE
+#RUN echo $INPUT_DIRECTORY
+#RUN echo $GITHUB_WORKSPACE
+#RUN echo "${INPUT_DIRECTORY}"
+#RUN echo GITHUB_WORKSPACE
 
 
 #RUN echo "$PWD"
