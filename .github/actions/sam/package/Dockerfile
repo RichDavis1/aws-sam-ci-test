@@ -27,8 +27,12 @@ COPY entrypoint.sh /entrypoint.sh
 #COPY . .
 
 RUN ls -R
+RUN echo "go env"
 RUN go env
+RUN echo "path"
 RUN echo $PATH
+
+ENV PATH="~/usr/local/go:$PATH")
 #WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
 
