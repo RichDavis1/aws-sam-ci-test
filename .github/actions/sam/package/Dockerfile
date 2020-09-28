@@ -31,7 +31,7 @@ RUN echo "go env"
 RUN go env
 RUN echo "path"
 RUN echo $PATH
-
+RUN cd /usr/local ls -R
 ENV PATH="/usr/local/go:$PATH"
 RUN echo $PATH
 
