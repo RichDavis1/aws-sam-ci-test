@@ -34,6 +34,8 @@ RUN echo $PATH
 
 ENV PATH="/usr/local/go:$PATH"
 RUN echo $PATH
+
+RUN ls -la ~/ | more
 #WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
 
