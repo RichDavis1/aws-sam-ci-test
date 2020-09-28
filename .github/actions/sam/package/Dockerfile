@@ -37,6 +37,7 @@ RUN echo $GOPATH
 #ENV PATH "$PATH:/home/runner/work/aws-sam-ci-test/aws-sam-ci-test/go"
 #ENV PATH "$PATH:/go"
 RUN echo $PATH
+RUN echo "export PATH=/usr/local/go/bin:${PATH}" >> /root/.bashrc
 COPY entrypoint.sh /entrypoint.sh
 
 
