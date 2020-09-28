@@ -2,6 +2,7 @@
 #FROM golang
 FROM homebrew/brew
 
+RUN brew update-reset
 RUN brew bundle
 
 RUN brew --version
