@@ -37,7 +37,7 @@ RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
 #RUN cd ./.sam-testaroni
 #COPY ./../.sam-testaroni .
 #COPY ./sam-testaroni .
-RUN "export PATH=/usr/bin:$PATH"
+ENV PATH="/usr/local/bin:$PATH"
 COPY . .
 COPY entrypoint.sh /entrypoint.sh
 
