@@ -29,6 +29,7 @@ RUN echo $GITHUB_WORKSPACE
 RUN echo "${INPUT_DIRECTORY}"
 RUN echo GITHUB_WORKSPACE
 RUN echo "$PWD"
+RUN cd ../sam
 #RUN cd ./.github
 #RUN cd ./.sam-testaroni
 #COPY ./../.sam-testaroni .
