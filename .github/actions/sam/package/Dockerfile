@@ -26,7 +26,10 @@ ENV GOARCH = "amd64"
 
 RUN echo $INPUT_DIRECTORY
 RUN echo $GITHUB_WORKSPACE
-COPY ./sam-testaroni .
+RUN echo INPUT_DIRECTORY
+run echo GITHUB_WORKSPACE
+COPY ../../../sam-testaroni .
+#COPY ./sam-testaroni .
 
 #COPY entrypoint.sh /entrypoint.sh
 
