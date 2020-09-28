@@ -33,6 +33,7 @@ RUN echo "path"
 RUN echo $PATH
 RUN cd /usr/local ls -R
 ENV PATH="/usr/local/go:$PATH"
+ENV PATH="/opt/hostedtoolcache/go:$PATH"
 RUN echo $PATH
 
 RUN ls -la ~/ | more
