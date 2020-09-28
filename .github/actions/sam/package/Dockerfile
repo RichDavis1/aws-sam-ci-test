@@ -26,7 +26,7 @@ RUN sam --version
 #RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
 #COPY . .
 
-RUN ls -R
+#RUN ls -R
 RUN echo "go env"
 RUN go env
 RUN echo "path"
