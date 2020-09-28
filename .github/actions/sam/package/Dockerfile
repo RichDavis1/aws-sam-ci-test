@@ -4,6 +4,9 @@ LABEL maintainer="Shaun Jackman <sjackman@gmail.com>"
 LABEL name="linuxbrew/alpine"
 
 RUN apk add bash
+RUN apk --update add  procps  &&\
+    rm -rf /var/cache/apk/*
+    
 RUN apk update \
 	&& apk --no-cache add bash coreutils curl file g++ grep git libc6-compat make ruby ruby-bigdecimal ruby-etc ruby-fiddle ruby-irb ruby-json ruby-test-unit sudo \
 	&& adduser -D -s /bin/bash linuxbrew \
@@ -19,8 +22,8 @@ ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH \
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 RUN test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
 RUN test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-RUN test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-RUN echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+#RUN test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+#RUN echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 
 RUN brew --version
 RUN brew brew tap aws/tap
