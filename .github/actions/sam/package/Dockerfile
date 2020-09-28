@@ -33,9 +33,9 @@ ENV GOARCH = "amd64"
 
 RUN echo $PATH
 RUN echo $GOPATH
-ENV PATH "$PATH:/usr/local/go/bin"
-ENV PATH "$PATH:/home/runner/work/aws-sam-ci-test/aws-sam-ci-test/go"
-ENV PATH "$PATH:/go"
+#ENV PATH "$PATH:/usr/local/go/bin"
+#ENV PATH "$PATH:/home/runner/work/aws-sam-ci-test/aws-sam-ci-test/go"
+#ENV PATH "$PATH:/go"
 RUN echo $PATH
 COPY entrypoint.sh /entrypoint.sh
 
