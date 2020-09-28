@@ -27,7 +27,7 @@ COPY entrypoint.sh /entrypoint.sh
 #COPY . .
 
 RUN ls -R
-
+RUN go env
 #WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
 
