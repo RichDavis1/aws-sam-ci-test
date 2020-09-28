@@ -10,8 +10,8 @@ jobs:
   checkout:
     name: Checkout
     runs-on: ubuntu-latest
-    container:
-      image: golang    
+    #container:
+    #  image: golang    
     steps:
     - name: Prepare Environment
       uses: actions/setup-go@v2
