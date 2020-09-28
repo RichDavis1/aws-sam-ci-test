@@ -31,6 +31,10 @@ ENV GOARCH = "amd64"
 #ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN echo $PATH
 RUN echo $GOPATH
+ENV PATH "$PATH:/home/runner/work/aws-sam-ci-test/aws-sam-ci-test/go"
+ENV PATH "$PATH:/go"
 COPY entrypoint.sh /entrypoint.sh
 
+
+ 
 ENTRYPOINT ["/entrypoint.sh"]
