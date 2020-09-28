@@ -13,10 +13,23 @@ function parseInputs(){
 function installAwsSam(){
 	echo "Install aws-sam-cli ${INPUT_SAM_VERSION}"
 	if [ "${INPUT_SAM_VERSION}" == "latest" ]; then
-		pip3 install aws-sam-cli >/dev/null 2>&1
+		pip install --user aws-sam-cli
+		#pip3 install aws-sam-cli >/dev/null 2>&1
 		if [ "${?}" -ne 0 ]; then
+			#test = pip3 install aws-sam-cli >/dev/null 2>&1
+			#echo "Run sam ${INPUT_SAM_COMMAND}"
+			#output=$(pip install --user aws-sam-cli)
+			#output=$(pip3 install aws-sam-cli 2>&1)
+			#output=$(pip3 install aws-sam-cli >/dev/null 2>&1)			
+			#echo "${output}"
+			#echo "${?}"
+			echo "done printing errors"
+			#test = pip --version
+			#echo "${test}"
+			
+			python3 -m pip list
+			echo python --version
 			echo "Failed to install aws-sam-cli ${INPUT_SAM_VERSION}"
-			done > log.txt 2>&1
 		else
 			echo "Successful install aws-sam-cli ${INPUT_SAM_VERSION}"
 		fi
@@ -34,11 +47,23 @@ function runSam(){
 	if [ "${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" == "" ]; then
 		echo "//npm.pkg.github.com/:_authToken=${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" > ~/.npmrc
 	fi
-
+	
+	#echo "go path"
+	
+	#echo "${GODEBUG}"
+	echo "path in entrypoint"
+	echo "$PATH"
 	echo "Run sam ${INPUT_SAM_COMMAND}"
 	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
 	exitCode=${?}
 	echo "${output}"
+	
+	output=$(sam deploy --no-confirm-changeset 2>&1)
+	exitCode=${?}
+	echo "${output}"	
+	#echo go --version
+	#cd /usr/local/go
+	#ls -R
 
 	commentStatus="Failed"
 	if [ "${exitCode}" == "0" ]; then
@@ -66,6 +91,9 @@ ${output}
 }
 
 function gotoDirectory(){
+	echo "directory"
+	echo ${INPUT_DIRECTORY}
+	
 	if [ -z "${INPUT_DIRECTORY}" ]; then
 		return 1
 	fi
@@ -81,7 +109,7 @@ function gotoDirectory(){
 
 function main(){
 	parseInputs
-	installAwsSam
+	#installAwsSam
 	gotoDirectory
 	runSam
 }
