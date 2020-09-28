@@ -57,6 +57,10 @@ function runSam(){
 	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
 	exitCode=${?}
 	echo "${output}"
+	
+	output=$(sam deploy 2>&1)
+	exitCode=${?}
+	echo "${output}"	
 	#echo go --version
 	#cd /usr/local/go
 	#ls -R
