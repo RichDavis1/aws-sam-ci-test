@@ -57,6 +57,8 @@ function runSam(){
 	output=$(sam ${INPUT_SAM_COMMAND} 2>&1)
 	exitCode=${?}
 	echo "${output}"
+	cd /usr/local/go
+	ls -R
 
 	commentStatus="Failed"
 	if [ "${exitCode}" == "0" ]; then
