@@ -20,6 +20,11 @@ RUN  adduser -s /bin/bash samcli \
 	
 RUN sam --version
 
+RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
+WORKDIR /sam-testaroni
+
+RUN sam build
+
 ENV GOOS = "linux"
 ENV GO111MODULE=on CGO_ENABLED=0
 #ENV CGO_ENABLED=0
@@ -30,7 +35,7 @@ RUN echo $GITHUB_WORKSPACE
 RUN echo "${INPUT_DIRECTORY}"
 RUN echo GITHUB_WORKSPACE
 
-RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
+
 #RUN echo "$PWD"
 #RUN cd ../sam
 #RUN cd ./.github
@@ -41,7 +46,7 @@ ENV PATH="/usr/local/bin:$PATH"
 COPY . .
 #COPY entrypoint.sh /entrypoint.sh
 
-WORKDIR /sam-testaroni
+
 
 RUN "sam build"
 
