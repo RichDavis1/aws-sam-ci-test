@@ -23,6 +23,8 @@ RUN sam --version
 RUN git clone https://github.com/RichDavis1/aws-sam-ci-test.git
 WORKDIR /sam-testaroni/.aws-sam/build
 
+RUN ls -R
+
 RUN sam build
 
 ENV GOOS = "linux"
