@@ -24,7 +24,8 @@ ENV GO111MODULE=on CGO_ENABLED=0
 #ENV CGO_ENABLED=0
 ENV GOARCH = "amd64"
 
-COPY ./.sam-testaroni .
+RUN echo $GITHUB_WORKSPACE
+COPY ./sam-testaroni .
 
 #COPY entrypoint.sh /entrypoint.sh
 
