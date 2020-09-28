@@ -26,7 +26,8 @@ COPY . .
 
 RUN ls -R
 
-WORKDIR /sam-testaroni/.aws-sam/build
+WORKDIR ./aws-sam-ci-test/sam-testaroni
+#WORKDIR /sam-testaroni/.aws-sam/build
 
 RUN ls -R
 
