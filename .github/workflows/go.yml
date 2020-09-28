@@ -13,14 +13,15 @@ jobs:
     container:
       image: golang    
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
     - name: Prepare Environment
       uses: actions/setup-go@v2
       with:
         go-version: ^1.14
     - run: |       
-        go version
+        go version       
+    - name: Checkout
+      uses: actions/checkout@v2
+
     #- run: go version
     - name: sam build
       uses: ./.github/actions/sam/package
