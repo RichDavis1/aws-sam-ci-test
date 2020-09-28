@@ -16,15 +16,15 @@ jobs:
       
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Prepare Environment
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.x
-    - run: |       
-        echo "::add-path::${{ github.workspace }}/bin"
-        echo "export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin"
-        echo $PATH
-        go version 
+    #- name: Prepare Environment
+    #  uses: actions/setup-go@v2
+    #  with:
+    #    go-version: 1.x
+    #- run: |       
+    #    echo "::add-path::${{ github.workspace }}/bin"
+    #    echo "export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin"
+    #    echo $PATH
+    #    go version 
     #- run: go version
     - name: sam build
       uses: ./.github/actions/sam/package
