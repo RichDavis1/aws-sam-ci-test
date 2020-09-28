@@ -31,13 +31,14 @@ RUN echo "go env"
 RUN go env
 RUN echo "path"
 RUN echo $PATH
-RUN cd /usr/local ls -R
+#RUN cd /usr/local ls -R
 ENV PATH="/usr/local/go:$PATH"
 ENV PATH="/opt/hostedtoolcache/go:$PATH"
 ENV PATH="/home/runner/go/bin/go:$PATH"
-RUN echo $PATH
-RUN tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
-RUN export PATH=$PATH:/usr/local/go/bin
+#RUN echo $PATH
+#RUN tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
+
+RUN "export PATH=/usr/local/go/bin:$PATH"
 #RUN ls -la ~/ | more
 #WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
