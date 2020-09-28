@@ -28,7 +28,7 @@ RUN echo $INPUT_DIRECTORY
 RUN echo $GITHUB_WORKSPACE
 RUN echo "${INPUT_DIRECTORY}"
 RUN echo GITHUB_WORKSPACE
-COPY ../../sam-testaroni .
+COPY ./../.sam-testaroni .
 #COPY ./sam-testaroni .
 
 #COPY entrypoint.sh /entrypoint.sh
