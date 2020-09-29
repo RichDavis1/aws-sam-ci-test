@@ -1,6 +1,6 @@
 FROM golang:1.14.0-alpine
 
-ENV SAM_CLI_TELEMETRY 0
+#ENV SAM_CLI_TELEMETRY 0
 
 RUN apk add bash
 RUN apk add git
@@ -10,9 +10,11 @@ RUN apk add --update --no-cache python3-dev && ln -sf python3-dev /usr/bin/pytho
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 
-RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
-   pip --no-cache-dir install aws-sam-cli awscli && \
-   apk del builddeps
+RUN apk add --no-cache --virtual builddeps gcc musl-dev
+RUN pip install awscli aws-sam-cli
+#RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
+#   pip --no-cache-dir install aws-sam-cli awscli && \
+#   apk del builddeps
 
 #RUN  adduser -s /bin/bash samcli \
 #  --disabled-password \
@@ -32,12 +34,12 @@ RUN go env
 RUN echo "path"
 RUN echo $PATH
 #RUN cd /usr/local ls -R
-ENV PATH="/usr/local/go:$PATH"
-ENV PATH="/opt/hostedtoolcache/go:$PATH"
-ENV PATH="/home/runner/go/bin/go:$PATH"
+#ENV PATH="/usr/local/go:$PATH"
+#ENV PATH="/opt/hostedtoolcache/go:$PATH"
+#ENV PATH="/home/runner/go/bin/go:$PATH"
 RUN echo $PATH
 #RUN tar -C /usr/local -xzf go1.14.3.linux-amd64.tar.gz
-RUN export PATH=$PATH:/usr/local/go/bin
+#RUN export PATH=$PATH:/usr/local/go/bin
 #RUN ls -la ~/ | more
 #WORKDIR ./aws-sam-ci-test/sam-testaroni
 #WORKDIR /sam-testaroni/.aws-sam/build
@@ -68,6 +70,10 @@ RUN export PATH=$PATH:/usr/local/go/bin
 #COPY . .
 
 
+#ENV GOOS = "linux"
+#ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+#ENV GOARCH = "amd64"
 
 
 #RUN "sam build"
