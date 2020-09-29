@@ -70,6 +70,10 @@ RUN echo $PATH
 #COPY . .
 
 
+ENV GOOS = "linux"
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+ENV GOARCH = "amd64"
 
 
 #RUN "sam build"
