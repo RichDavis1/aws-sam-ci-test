@@ -3,13 +3,16 @@ name: Go
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
 
 jobs:
   checkout:
     name: Checkout
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    if: github.event.pull_request.merged == 'true'
+    
+
     #container:
     # image: golang    
     steps:
