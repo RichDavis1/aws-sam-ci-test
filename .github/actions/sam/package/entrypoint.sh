@@ -59,7 +59,7 @@ function runSam(){
 	echo "${output}"
 	
 	output=$(sam package --s3-bucket ${AWS_S3_BUCKET} 2>&1)
-	output=$(sam deploy --sam-app sam-app --no-confirm-changeset 2>&1)
+	output=$(sam deploy --stack-name sam-app --no-confirm-changeset 2>&1)
 	exitCode=${?}
 	echo "${output}"	
 	#echo go --version
