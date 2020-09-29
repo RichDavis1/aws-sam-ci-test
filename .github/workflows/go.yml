@@ -10,7 +10,7 @@ jobs:
   checkout:
     name: Checkout
     runs-on: ubuntu-latest    
-    if: github.event.pull_request.merged == 'true'
+    #if: github.event.pull_request.merged == 'true'
     
 
     #container:
