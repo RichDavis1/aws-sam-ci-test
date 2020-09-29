@@ -41,7 +41,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	}
 
 	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("Hello richie update pretty please now1, %v", string(ip)),
+		Body:       fmt.Sprintf("Hello richie update pretty please now5, %v", string(ip)),
 		StatusCode: 200,
 	}, nil
 }
