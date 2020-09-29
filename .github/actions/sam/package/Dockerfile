@@ -10,9 +10,11 @@ RUN apk add --update --no-cache python3-dev && ln -sf python3-dev /usr/bin/pytho
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 
-RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
-   pip --no-cache-dir install aws-sam-cli awscli && \
-   apk del builddeps
+RUN apk add --no-cache --virtual builddeps gcc musl-dev
+RUN pip install awscli aws-sam-cli
+#RUN apk add --no-cache --virtual builddeps gcc musl-dev && \
+#   pip --no-cache-dir install aws-sam-cli awscli && \
+#   apk del builddeps
 
 #RUN  adduser -s /bin/bash samcli \
 #  --disabled-password \
