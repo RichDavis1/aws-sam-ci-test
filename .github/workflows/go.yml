@@ -10,7 +10,7 @@ jobs:
   checkout:
     name: Checkout
     runs-on: ubuntu-latest    
-    if: github.event.pull_request.merged == 'true'
+    #if: github.event.pull_request.merged == 'true'
     
 
     #container:
@@ -33,12 +33,13 @@ jobs:
       uses: ./.github/actions/sam/package
       #uses: TractorZoom/sam-cli-action@master
       with:
-        sam_command: "build --debug"
+        sam_command: "build && sam package --s3-bucket $AWS_S3_BUCKET --debug"
         directory: ./sam-testaroni
         #directory: ./sam-testaroni/.aws-sam/build        
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
     #- name: sam deploy
     #  uses: ./.github/actions/sam/package  
