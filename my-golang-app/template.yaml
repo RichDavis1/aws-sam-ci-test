@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  sam-testaroni
-  Sample SAM Template for sam-testaroni
+  my-golang-app
+  Sample SAM Template for my-golang-app
 
 Globals:
   Function:
