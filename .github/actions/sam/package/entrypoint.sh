@@ -31,12 +31,12 @@ function runSam(){
 
 	if [ "$GITHUB_EVENT_NAME" == "pull_request" ] && [ "${INPUT_ACTIONS_COMMENT}" == "true" ]; then
 		commentWrapper="#### \`sam ${INPUT_SAM_COMMAND}\` ${commentStatus}
-<details><summary>Show Output</summary>
-\`\`\`
-${output}
-\`\`\`
-</details>
-*Workflow: \`${GITHUB_WORKFLOW}\`, Action: \`${GITHUB_ACTION}\`*"
+		<details><summary>Show Output</summary>
+		\`\`\`
+		${output}
+		\`\`\`
+		</details>
+		*Workflow: \`${GITHUB_WORKFLOW}\`, Action: \`${GITHUB_ACTION}\`*"
 
 		payload=$(echo "${commentWrapper}" | jq -R --slurp '{body: .}')
 		commentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
