@@ -3,80 +3,20 @@ name: Go
 on:
   push:
     branches: [ master ]
-  #pull_request:
-  #  branches: [ master ]
 
 jobs:
   checkout:
     name: Checkout
-    runs-on: ubuntu-latest    
-    #if: github.event.pull_request.merged == 'true'
-    
-
-    #container:
-    # image: golang    
-    steps:
-      
+    runs-on: ubuntu-latest      
+    steps:      
     - name: Checkout
       uses: actions/checkout@v2
-    #- name: Prepare Environment
-    #  uses: actions/setup-go@v2
-    #   with:
-    #    go-version: 1.x
-    #- run: |       
-    #    echo "::add-path::${{ github.workspace }}/bin"
-    #    echo "export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin"
-    #    echo $PATH
-    #    go version 
-    #- run: go version
     - name: sam build
       uses: ./.github/actions/sam/package
-      #uses: TractorZoom/sam-cli-action@master
       with:
         sam_command: "build --debug"
-        directory: ./sam-testaroni
-        #directory: ./sam-testaroni/.aws-sam/build        
+        directory: ./my-golang-app
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        #AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-    #- name: sam deploy
-    #  uses: ./.github/actions/sam/package  
-      #uses: TractorZoom/sam-cli-action@master
-    #  with:
-    #    sam_command: "deploy"
-    #  env:
-    #    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #    AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}      
-    #- name: SAM Package
-    #  uses: ./.github/actions/sam/package
-    #  env:
-    #    SAM_CLI_TELEMETRY: 0
-    #    AWS_ACCESS_KEY_ID: $
-    #    AWS_SECRET_ACCESS_KEY: $
-    #  with:
-    #    prefix: $/$
-    ##    bucket: $ 
-    #    template_file: template.yaml
-    #    output_template_file: $.yaml
-    #    working_directory: ./.aws-sam/build
-    #- name: Push Template to S3
-    #  uses: actions/aws/cli@master
-    #  env:
-    #    AWS_ACCESS_KEY_ID: $
-    #    AWS_SECRET_ACCESS_KEY: $
-    #  with:
-    #    args: >-
-    #      s3 cp ./.aws-sam/build/$.yaml
-    #      s3://$/$/$/template.yaml
-    #- name: Publish
-    #  if: startsWith(github.ref, 'refs/tags')
-    #  uses: ./.github/actions/sam/publish
-    #  env:
-    #    SAM_CLI_TELEMETRY: 0
-    #    AWS_ACCESS_KEY_ID: $
-    #    AWS_SECRET_ACCESS_KEY: $
-    #  with:
-    #    TEMPLATE: ./.aws-sam/build/$.yaml
