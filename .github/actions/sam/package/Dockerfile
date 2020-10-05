@@ -1,4 +1,4 @@
-FROM livingtribunal/go-sam-cli:first 
+FROM livingtribunal/go-sam-cli:latest 
 #FROM golang:1.14.0-alpine
 
 #ENV SAM_CLI_TELEMETRY 0
