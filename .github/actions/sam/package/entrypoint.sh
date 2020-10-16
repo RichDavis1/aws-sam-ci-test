@@ -24,7 +24,10 @@ function runSam(){
 	output=$(sam build --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"	
-
+	
+	echo "exit code rich"
+	echo ${exitCode}
+	
 	commentStatus="Failed"
 	if [ "${exitCode}" == "0" ]; then
 		commentStatus="Success"
