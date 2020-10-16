@@ -8,6 +8,15 @@ Globals:
   Function:
     Timeout: 5
 
+Parameters: 
+  Stage: 
+    Type: String    
+    Default: dev
+    AllowedValues:
+      - dev
+      - stage 
+      - prod
+
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function 
@@ -41,7 +50,20 @@ Resources:
             Method: GET
       Environment: 
         Variables:
-          PARAM1: VALUE          
+          PARAM1: VALUE    
+
+  AliasVersion:
+    Type: AWS::Serverless::Function 
+    DeletionPolicy: Retain
+    Properties:
+      FunctionName: !Sub 'AliasVersion-${Stage}'
+      CodeUri: AliasVersion/
+      Handler: !Sub 'AliasVersion-${Stage}'
+      Runtime: go1.x
+      Tracing: Active 
+      Environment: 
+        Variables:
+          PARAM1: VALUE
 
 Outputs:
   HelloWorldAPI:
@@ -53,6 +75,11 @@ Outputs:
   DontTouchThis:
     Description: "Second Lambda Function ARN"
     Value: !GetAtt DontTouchThis.Arn    
+  
+    Description: "Second Lambda Function ARN"
+    Value: !GetAtt AliasVersion.Arn
+      #!Join ["-", [AliasVersion, !Ref Stage]]:
+    #Value: !GetAtt AliasVersion.Arn        
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
