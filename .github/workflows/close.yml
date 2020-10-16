@@ -1,0 +1,26 @@
+name: Go
+
+on:
+  #push:
+  pull_request:
+    type: [review_request_removed, closed]
+    branches: [master]
+
+jobs:
+  checkout:
+    name: Checkout
+    runs-on: ubuntu-latest      
+    steps:      
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: sam build
+      uses: ./.github/actions/sam/package
+      with:
+        sam_command: "build --debug"
+        stage: dev
+        directory: ./my-golang-app
+        stack: test
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}    
