@@ -9,7 +9,7 @@ Globals:
     Timeout: 5
 
 Parameters: 
-  Stage: 
+  EnvStage: 
     Type: String    
     Default: dev
     AllowedValues:
@@ -23,10 +23,21 @@ Resources:
     Properties:
       FunctionName: !Sub 'TestSwitching-${EnvStage}'
       CodeUri: TestSwitching/
-      Handler: !Sub 'TestSwitching-${Stage}'
+      Handler: !Sub 'TestSwitching-${EnvStage}'
       Runtime: go1.x
       Tracing: Active 
-      Environment: 
-        Variables:
-          PARAM1: VALUE
+      Events:
+        TestAPI:
+          Type: Api 
+          Properties:
+            Path: '/TestSwitching'
+            Method: GET   
 
+
+Outputs: 
+  TestSwitchingFunction:
+    Description: "Test Lambda Function ARN"
+    Value: !GetAtt TestSwitchingFunction.Arn
+  TestSwitchingAPI: 
+    Description: "API Gateway endpoint URL for Prod environment for First Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/TestSwitching-${EnvStage}/"            

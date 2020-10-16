@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'my-golang-app Sample SAM Template for my-golang-app
+
+  '
+Globals:
+  Function:
+    Timeout: 5
+Parameters:
+  EnvStage:
+    Type: String
+    Default: dev
+    AllowedValues:
+    - dev
+    - stage
+    - prod
+Resources:
+  TestSwitchingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: TestSwitching-${EnvStage}
+      CodeUri: TestSwitchingFunction
+      Handler:
+        Fn::Sub: TestSwitching-${EnvStage}
+      Runtime: go1.x
+      Tracing: Active
+      Events:
+        TestAPI:
+          Type: Api
+          Properties:
+            Path: /TestSwitching
+            Method: GET
+Outputs:
+  TestSwitchingFunction:
+    Description: Test Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - TestSwitchingFunction
+      - Arn
+  TestSwitchingAPI:
+    Description: API Gateway endpoint URL for Prod environment for First Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/TestSwitching-${EnvStage}/
