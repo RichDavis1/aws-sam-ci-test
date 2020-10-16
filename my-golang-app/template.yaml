@@ -69,7 +69,7 @@ Resources:
     Type: AWS::Serverless::Function 
     Properties:
       FunctionName: !Sub 'TestSwitching-${EnvStage}'
-      CodeUri: TestSwitching/
+      CodeUri: CoreTest/TestSwitching/
       Handler: !Sub 'TestSwitching-${EnvStage}'
       Runtime: go1.x
       Tracing: Active 
