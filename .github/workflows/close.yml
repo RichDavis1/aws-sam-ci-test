@@ -1,7 +1,6 @@
 name: ClosePullRequest
 
 on:
-  #push:
   pull_request:
     types: [review_request_removed, closed]
     branches: [master]
