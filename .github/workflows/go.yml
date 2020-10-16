@@ -16,7 +16,7 @@ jobs:
       uses: ./.github/actions/sam/package
       with:
         sam_command: "build --debug"
-        stage: dev
+        stage: stage
         directory: ./my-golang-app
         stack: test
       env:
