@@ -24,10 +24,12 @@ function runSam(){
 	output=$(sam build --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"	
-
-	commentStatus="Failed"
-	if [ "${exitCode}" == "0" ]; then
-		commentStatus="Success"
+	
+	echo "exit code rich"
+	echo ${exitCode}
+	
+	if [ "${exitCode}" == "1" ]; then
+		exit 1
 	fi
 	
 	echo "Running sam deploy"
