@@ -13,6 +13,9 @@ function runSam(){
 	if [ "${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" == "" ]; then
 		echo "//npm.pkg.github.com/:_authToken=${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" > ~/.npmrc
 	fi
+	
+	echo "stage"
+	echo "${INPUT_STAGE}"
 
 	echo "Running sam build"
 	output=$(sam build --debug 2>&1)
