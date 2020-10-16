@@ -9,7 +9,7 @@ Globals:
     Timeout: 5
 
 Parameters: 
-  Stage: 
+  EnvStage: 
     Type: String    
     Default: dev
     AllowedValues:
@@ -56,9 +56,9 @@ Resources:
     Type: AWS::Serverless::Function 
     DeletionPolicy: Retain
     Properties:
-      FunctionName: !Sub 'AliasVersion-${Stage}'
+      FunctionName: !Sub 'AliasVersion-${EnvStage}'
       CodeUri: AliasVersion/
-      Handler: !Sub 'AliasVersion-${Stage}'
+      Handler: !Sub 'AliasVersion-${EnvStage}'
       Runtime: go1.x
       Tracing: Active 
       Environment: 
