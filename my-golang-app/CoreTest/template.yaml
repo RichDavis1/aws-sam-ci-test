@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  my-golang-app
+  Sample SAM Template for my-golang-app
+
+Globals:
+  Function:
+    Timeout: 5
+
+Parameters: 
+  Stage: 
+    Type: String    
+    Default: dev
+    AllowedValues:
+      - dev
+      - stage 
+      - prod
+
+Resources:
+  TestSwitchingFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: !Sub 'TestSwitching-${EnvStage}'
+      CodeUri: TestSwitching/
+      Handler: !Sub 'TestSwitching-${Stage}'
+      Runtime: go1.x
+      Tracing: Active 
+      Environment: 
+        Variables:
+          PARAM1: VALUE
+

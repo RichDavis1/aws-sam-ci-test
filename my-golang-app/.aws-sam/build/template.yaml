@@ -1,13 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: 'my-golang-app
-
-  Sample SAM Template for my-golang-app
+Description: 'my-golang-app Sample SAM Template for my-golang-app
 
   '
 Globals:
   Function:
     Timeout: 5
+Parameters:
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+    - dev
+    - stage
+    - prod
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
@@ -41,6 +47,20 @@ Resources:
       Environment:
         Variables:
           PARAM1: VALUE
+  AliasVersion:
+    Type: AWS::Serverless::Function
+    DeletionPolicy: Retain
+    Properties:
+      FunctionName:
+        Fn::Sub: AliasVersion-${Stage}
+      CodeUri: AliasVersion
+      Handler:
+        Fn::Sub: AliasVersion-${Stage}
+      Runtime: go1.x
+      Tracing: Active
+      Environment:
+        Variables:
+          PARAM1: VALUE
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
@@ -56,7 +76,7 @@ Outputs:
     Description: Second Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - DontTouchThis
+      - AliasVersion
       - Arn
   HelloWorldFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
