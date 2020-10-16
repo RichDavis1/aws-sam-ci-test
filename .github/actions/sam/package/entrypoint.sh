@@ -17,13 +17,16 @@ function runSam(){
 	echo "stage"
 	echo "${INPUT_STAGE}"
 
+	echo "stack"
+	echo "${INPUT_STACK}"	
+
 	echo "Running sam build"
 	output=$(sam build --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"	
 
 	echo "Running sam deploy"
-	output=$(sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
+	output=$(sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides Stage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"		
 
