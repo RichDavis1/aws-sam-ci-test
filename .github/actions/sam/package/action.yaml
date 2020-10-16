@@ -5,6 +5,9 @@ branding:
   icon: "terminal"
   color: "blue"
 inputs:
+  stage:
+    description: "The lambda stage"
+    required: false
   sam_version:
     description: "AWS SAM version to install."
     default: "latest"
