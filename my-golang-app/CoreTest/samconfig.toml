@@ -9,4 +9,3 @@ region = "us-east-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "EnvStage=\"dev\""
-
