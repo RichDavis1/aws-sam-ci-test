@@ -12,6 +12,8 @@ jobs:
     steps:      
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.before }}
     - name: sam build
       uses: ./.github/actions/sam/package
       with:
