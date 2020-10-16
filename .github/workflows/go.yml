@@ -25,6 +25,7 @@ jobs:
       uses: ./.github/actions/sam/package
       with:
         sam_command: "build --debug"
+        stage: "dev"
         directory: ./my-golang-app/CoreTest
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
