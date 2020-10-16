@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
       with:
-        ref: ${{ github.event.before }}      
+        ref: ${{ github.event.base_ref }}      
     - name: sam build
       uses: ./.github/actions/sam/package
       with:
