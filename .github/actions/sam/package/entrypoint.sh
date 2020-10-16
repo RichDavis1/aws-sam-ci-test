@@ -20,7 +20,7 @@ function runSam(){
 	echo "${output}"	
 
 	echo "Running sam deploy"
-	output=$(sam deploy --no-confirm-changeset --debug 2>&1)
+	output=$(sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"		
 
