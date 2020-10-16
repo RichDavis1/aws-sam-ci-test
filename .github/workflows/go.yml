@@ -11,14 +11,12 @@ jobs:
     runs-on: ubuntu-latest      
     steps:      
     - name: Checkout
-      uses: actions/checkout@v1
-      with:
-        ref: ${{ github.event.before }}
+      uses: actions/checkout@v2
     - name: sam build
       uses: ./.github/actions/sam/package
       with:
         sam_command: "build --debug"
-        stage: dev
+        stage: stage
         directory: ./my-golang-app
         stack: test
       env:
