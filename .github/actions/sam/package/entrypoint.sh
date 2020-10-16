@@ -28,9 +28,8 @@ function runSam(){
 	echo "exit code rich"
 	echo ${exitCode}
 	
-	commentStatus="Failed"
-	if [ "${exitCode}" == "0" ]; then
-		commentStatus="Success"
+	if [ "${exitCode}" == "1" ]; then
+		exit 1
 	fi
 	
 	echo "Running sam deploy"
