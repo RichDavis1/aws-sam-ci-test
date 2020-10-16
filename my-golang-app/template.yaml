@@ -65,6 +65,21 @@ Resources:
         Variables:
           PARAM1: VALUE
 
+  TestSwitchingFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: !Sub 'TestSwitching-${EnvStage}'
+      CodeUri: TestSwitching/
+      Handler: !Sub 'TestSwitching-${EnvStage}'
+      Runtime: go1.x
+      Tracing: Active 
+      Events:
+        TestAPI:
+          Type: Api 
+          Properties:
+            Path: '/TestSwitching'
+            Method: GET              
+              
 Outputs:
   HelloWorldAPI:
     Description: "API Gateway endpoint URL for Prod environment for First Function"
@@ -83,3 +98,9 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  TestSwitchingFunction:
+    Description: "Test Lambda Function ARN"
+    Value: !GetAtt TestSwitchingFunction.Arn
+  TestSwitchingAPI: 
+    Description: "API Gateway endpoint URL for Prod environment for First Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/TestSwitching-${EnvStage}/"   
