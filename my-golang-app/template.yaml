@@ -73,7 +73,7 @@ Resources:
       Runtime: go1.x
       Tracing: Active 
       Events:
-        TestAPI:
+        TestSwitchingAPI:
           Type: Api 
           Properties:
             Path: '/TestSwitching'
