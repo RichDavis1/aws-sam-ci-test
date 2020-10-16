@@ -21,7 +21,7 @@ var (
 func handler() (map[string]string, error) {
 	response := make(map[string]string)
 
-	response["Body"] = fmt.Sprintf("version dev")
+	response["Body"] = fmt.Sprintf("version current")
 	response["StatusCode"] = "200"
 
 	return response, nil
