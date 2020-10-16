@@ -46,6 +46,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 				return events.APIGatewayProxyResponse{}, ErrNoIP
 			}
 	*/
+	fmt.Println("test")
 
 	return events.APIGatewayProxyResponse{
 		Body:       fmt.Sprintf("Hello World failed"),
