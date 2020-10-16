@@ -3,7 +3,7 @@ name: ClosePullRequest
 on:
   #push:
   pull_request:
-    type: [review_request_removed, closed]
+    types: [review_request_removed, closed]
     branches: [master]
 
 jobs:
