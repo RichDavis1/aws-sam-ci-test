@@ -89,9 +89,6 @@ Outputs:
   DontTouchThis:
     Description: "Second Lambda Function ARN"
     Value: !GetAtt DontTouchThis.Arn    
-  AliasVersion:
-    Description: "Second Lambda Function ARN"
-    Value: !GetAtt AliasVersion.Arn
       #!Join ["-", [AliasVersion, !Ref Stage]]:
     #Value: !GetAtt AliasVersion.Arn        
   HelloWorldFunctionIamRole:
