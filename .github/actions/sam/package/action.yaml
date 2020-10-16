@@ -14,9 +14,6 @@ inputs:
   sam_command:
     description: "AWS SAM subcommand to execute."
     required: true
-  stage:
-    description: "The lambda stage"
-    required: false
   stack:
     description: "The lambda stack"
     required: false    
