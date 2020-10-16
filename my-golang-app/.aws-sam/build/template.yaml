@@ -5,9 +5,9 @@ Description: 'my-golang-app Sample SAM Template for my-golang-app
   '
 Globals:
   Function:
-    Timeout: 5
+    Timeout: 30
 Parameters:
-  Stage:
+  EnvStage:
     Type: String
     Default: dev
     AllowedValues:
@@ -49,18 +49,33 @@ Resources:
           PARAM1: VALUE
   AliasVersion:
     Type: AWS::Serverless::Function
-    DeletionPolicy: Retain
     Properties:
       FunctionName:
-        Fn::Sub: AliasVersion-${Stage}
+        Fn::Sub: AliasVersion-${EnvStage}
       CodeUri: AliasVersion
       Handler:
-        Fn::Sub: AliasVersion-${Stage}
+        Fn::Sub: AliasVersion-${EnvStage}
       Runtime: go1.x
       Tracing: Active
       Environment:
         Variables:
           PARAM1: VALUE
+  TestSwitchingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: TestSwitching-${EnvStage}
+      CodeUri: TestSwitchingFunction
+      Handler:
+        Fn::Sub: TestSwitching-${EnvStage}
+      Runtime: go1.x
+      Tracing: Active
+      Events:
+        TestSwitchingAPI:
+          Type: Api
+          Properties:
+            Path: /TestSwitching
+            Method: GET
 Outputs:
   HelloWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for First Function
@@ -76,7 +91,7 @@ Outputs:
     Description: Second Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - AliasVersion
+      - DontTouchThis
       - Arn
   HelloWorldFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
@@ -84,3 +99,13 @@ Outputs:
       Fn::GetAtt:
       - HelloWorldFunctionRole
       - Arn
+  TestSwitchingFunction:
+    Description: Test Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - TestSwitchingFunction
+      - Arn
+  TestSwitchingAPI:
+    Description: API Gateway endpoint URL for Prod environment for First Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/TestSwitching-${EnvStage}/
