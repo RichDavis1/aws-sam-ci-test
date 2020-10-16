@@ -54,7 +54,6 @@ Resources:
 
   AliasVersion:
     Type: AWS::Serverless::Function 
-    DeletionPolicy: Retain
     Properties:
       FunctionName: !Sub 'AliasVersion-${EnvStage}'
       CodeUri: AliasVersion/
