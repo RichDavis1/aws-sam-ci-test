@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: sam build
-      uses: ./.github/actions/sam/package
+      uses: ./.github/actions/sam/mergePR
       with:
         sam_command: "build --debug"
         stage: stage

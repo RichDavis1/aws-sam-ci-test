@@ -31,12 +31,6 @@ function runSam(){
 	if [ "${exitCode}" == "1" ]; then
 		exit 1
 	fi
-	
-	echo "Running sam deploy"
-	echo "sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides EnvStage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug"
-	output=$(sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides EnvStage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
-	exitCode=${?}
-	echo "${output}"		
 
 	commentStatus="Failed"
 	if [ "${exitCode}" == "0" ]; then

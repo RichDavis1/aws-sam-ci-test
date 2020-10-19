@@ -57,7 +57,7 @@ Resources:
     Properties:
       FunctionName: !Sub 'AliasVersion-${EnvStage}'
       CodeUri: AliasVersion/
-      Handler: !Sub 'AliasVersion-${EnvStage}'
+      Handler: 'AliasVersion'
       Runtime: go1.x
       Tracing: Active 
       Environment: 
@@ -69,7 +69,7 @@ Resources:
     Properties:
       FunctionName: !Sub 'TestSwitching-${EnvStage}'
       CodeUri: CoreTest/TestSwitching/
-      Handler: !Sub 'TestSwitching-${EnvStage}'
+      Handler: 'TestSwitching'
       Runtime: go1.x
       Tracing: Active 
       Events:
