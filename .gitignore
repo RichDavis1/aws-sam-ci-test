@@ -1,3 +1,5 @@
-
+/.aws-sam
 my-golang-app/.aws-sam/build/template.yaml
 my-golang-app/.aws-sam/build/TestSwitchingFunction/TestSwitching-dev
+my-golang-app/.aws-sam/build/TestSwitchingFunction/TestSwitching
+my-golang-app/.aws-sam/build/AliasVersion/AliasVersion
