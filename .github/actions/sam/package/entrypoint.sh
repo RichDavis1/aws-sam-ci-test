@@ -33,8 +33,8 @@ function runSam(){
 	fi
 	
 	echo "Running sam deploy"
-	echo "sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides Stage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug"
-	output=$(sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides Stage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
+	echo "sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides EnvStage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug"
+	output=$(sam deploy --stack-name ${INPUT_STACK}-${INPUT_STAGE} --parameter-overrides EnvStage=${INPUT_STAGE} --no-confirm-changeset --no-fail-on-empty-changeset --debug 2>&1)
 	exitCode=${?}
 	echo "${output}"		
 
